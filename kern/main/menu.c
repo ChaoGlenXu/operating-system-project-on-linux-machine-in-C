@@ -22,6 +22,14 @@
 
 #define MAXMENUARGS  16
 
+//code i added  V
+static int cmd_dbflags_options(int n, char **a);
+//some comments~
+//code i added  ^ 
+
+
+
+
 void
 getinterval(time_t s1, u_int32_t ns1, time_t s2, u_int32_t ns2,
 	    time_t *rs, u_int32_t *rns)
@@ -487,6 +495,7 @@ static struct {
 	{ "s",		cmd_shell },
 	{ "p",		cmd_prog },
 	{ "mount",	cmd_mount },
+	{ "dbflags",	cmd_dbflags_options },//i added this
 	{ "unmount",	cmd_unmount },
 	{ "bootfs",	cmd_bootfs },
 	{ "pf",		printfile },
@@ -550,7 +559,8 @@ cmd_dispatch(char *cmd)
 	char *word;
 	char *context;
 	int i, result;
-
+    //char *user_input;//i wrote this line code    
+    //strcpy(user_input, cmd);//i wrote this line code 
 	for (word = strtok_r(cmd, " \t", &context);
 	     word != NULL;
 	     word = strtok_r(NULL, " \t", &context)) {
@@ -579,6 +589,8 @@ cmd_dispatch(char *cmd)
 				    aftersecs, afternsecs,
 				    &secs, &nsecs);
 
+            //kprintf("cmd =%sstop here\n", cmd);//glen   
+            if( strcmp(cmd, "dbflags") == 0 ){kprintf("Current value of dbflags is 0x%x\n", dbflags); }//glen
 			kprintf("Operation took %lu.%09lu seconds\n",
 				(unsigned long) secs,
 				(unsigned long) nsecs);
@@ -654,3 +666,42 @@ menu(char *args)
 		menu_execute(buf, 0);
 	}
 }
+
+
+
+
+
+
+//my code for lab1 deliverble 2
+//to be printed dbflags options
+static const char *dbflags_options[] = {
+	"[df 1 on/off]        DB_LOCRE        ",
+	"[df 2 on/off]        DB_SYSCALL      ",
+	"[df 3 on/off]        DB_INTERRUPT    ",
+	"[df 4 on/off]        DB_DEVICE       ",
+	"[df 5 on/off]        DB_THREADS      ",
+	"[df 6 on/off]        DB_VM           ",
+	"[df 7 on/off]        DB_EXEC         ",
+	"[df 8 on/off]        DB_VFS          ",
+	"[df 9 on/off]        DB_SFS          ",
+	"[df 10 on/off]       DB_NET          ",
+	"[df 11 on/off]       DB_NETFS        ",
+	"[df 12 on/off]       DB_KAMALLOC     ",
+	NULL
+};
+
+
+static
+int
+cmd_dbflags_options(int n, char **a)
+{
+	(void)n;
+	(void)a;
+
+	showmenu("OS/161 Debug flags", dbflags_options);
+	return 0;
+}
+
+
+
+
