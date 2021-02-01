@@ -24,7 +24,7 @@
 
 //code i added  V
 static int cmd_dbflags_options(int n, char **a);
-//some comments~
+//some comme
 //code i added  ^ 
 
 
@@ -561,6 +561,176 @@ cmd_dispatch(char *cmd)
 	int i, result;
     //char *user_input;//i wrote this line code    
     //strcpy(user_input, cmd);//i wrote this line code 
+    //glen
+    if(strcmp(cmd, "df 1 on") == 0){
+        //kprintf("cmd =%sstop here\n", cmd);=
+        dbflags = dbflags + DB_LOCORE;
+		kprintf("Operation took %lu.%09lu seconds\n",(unsigned long) secs,(unsigned long) nsecs);
+        result = 0;
+        return result;
+    }
+    if(strcmp(cmd, "df 2 on") == 0){
+        //kprintf("cmd =%sstop here\n", cmd);
+        dbflags = dbflags + DB_SYSCALL;
+		kprintf("Operation took %lu.%09lu seconds\n",(unsigned long) secs,(unsigned long) nsecs);
+        result = 0;
+        return result;
+    }
+    if(strcmp(cmd, "df 3 on") == 0){
+        //kprintf("cmd =%sstop here\n", cmd);
+        dbflags = dbflags + DB_INTERRUPT;
+		kprintf("Operation took %lu.%09lu seconds\n",(unsigned long) secs,(unsigned long) nsecs);
+        result = 0;
+        return result;
+    }
+    if(strcmp(cmd, "df 4 on") == 0){
+        //kprintf("cmd =%sstop here\n", cmd);
+        dbflags = dbflags + DB_DEVICE;
+		kprintf("Operation took %lu.%09lu seconds\n",(unsigned long) secs,(unsigned long) nsecs);
+        result = 0;
+        return result;
+    }
+    if(strcmp(cmd, "df 5 on") == 0){
+        //kprintf("cmd =%sstop here\n", cmd);
+        dbflags = dbflags + DB_THREADS;
+		kprintf("Operation took %lu.%09lu seconds\n",(unsigned long) secs,(unsigned long) nsecs);
+        result = 0;
+        return result;
+    }
+    if(strcmp(cmd, "df 6 on") == 0){
+        //kprintf("cmd =%sstop here\n", cmd);
+        dbflags = dbflags + DB_VM;
+		kprintf("Operation took %lu.%09lu seconds\n",(unsigned long) secs,(unsigned long) nsecs);
+        result = 0;
+        return result;
+    }
+    if(strcmp(cmd, "df 7 on") == 0){
+        //kprintf("cmd =%sstop here\n", cmd);
+        dbflags = dbflags + DB_EXEC;
+		kprintf("Operation took %lu.%09lu seconds\n",(unsigned long) secs,(unsigned long) nsecs);
+        result = 0;
+        return result;
+    }
+    if(strcmp(cmd, "df 8 on") == 0){
+        //kprintf("cmd =%sstop here\n", cmd);
+        dbflags = dbflags + DB_VFS;
+		kprintf("Operation took %lu.%09lu seconds\n",(unsigned long) secs,(unsigned long) nsecs);
+        result = 0;
+        return result;
+    }
+    if(strcmp(cmd, "df 9 on") == 0){
+        //kprintf("cmd =%sstop here\n", cmd);
+        dbflags = dbflags + DB_SFS;
+		kprintf("Operation took %lu.%09lu seconds\n",(unsigned long) secs,(unsigned long) nsecs);
+        result = 0;
+        return result;
+    }
+    if(strcmp(cmd, "df 10 on") == 0){
+        //kprintf("cmd =%sstop here\n", cmd);
+        dbflags = dbflags + DB_NET;
+		kprintf("Operation took %lu.%09lu seconds\n",(unsigned long) secs,(unsigned long) nsecs);
+        result = 0;
+        return result;
+    }
+    if(strcmp(cmd, "df 11 on") == 0){
+        //kprintf("cmd =%sstop here\n", cmd);
+        dbflags = dbflags + DB_NETFS;
+		kprintf("Operation took %lu.%09lu seconds\n",(unsigned long) secs,(unsigned long) nsecs);
+        result = 0;
+        return result;
+    }
+    if(strcmp(cmd, "df 12 on") == 0){
+        //kprintf("cmd =%sstop here\n", cmd);
+        dbflags = dbflags + DB_KMALLOC;
+		kprintf("Operation took %lu.%09lu seconds\n",(unsigned long) secs,(unsigned long) nsecs);
+        result = 0;
+        return result;
+    }   //
+   if(strcmp(cmd, "df 1 off") == 0){
+        //kprintf("cmd =%sstop here\n", cmd);
+        dbflags = dbflags - DB_LOCORE;
+		kprintf("Operation took %lu.%09lu seconds\n",(unsigned long) secs,(unsigned long) nsecs);
+        result = 0;
+        return result;
+    }
+    if(strcmp(cmd, "df 2 off") == 0){
+        //kprintf("cmd =%sstop here\n", cmd);
+        dbflags = dbflags - DB_SYSCALL;
+		kprintf("Operation took %lu.%09lu seconds\n",(unsigned long) secs,(unsigned long) nsecs);
+        result = 0;
+        return result;
+    }
+    if(strcmp(cmd, "df 3 off") == 0){
+        //kprintf("cmd =%sstop here\n", cmd);
+        dbflags = dbflags - DB_INTERRUPT;
+		kprintf("Operation took %lu.%09lu seconds\n",(unsigned long) secs,(unsigned long) nsecs);
+        result = 0;
+        return result;
+    }
+    if(strcmp(cmd, "df 4 off") == 0){
+        //kprintf("cmd =%sstop here\n", cmd);
+        dbflags = dbflags - DB_DEVICE;
+		kprintf("Operation took %lu.%09lu seconds\n",(unsigned long) secs,(unsigned long) nsecs);
+        result = 0;
+        return result;
+    }
+    if(strcmp(cmd, "df 5 off") == 0){
+        //kprintf("cmd =%sstop here\n", cmd);
+        dbflags = dbflags - DB_THREADS;
+		kprintf("Operation took %lu.%09lu seconds\n",(unsigned long) secs,(unsigned long) nsecs);
+        result = 0;
+        return result;
+    }
+    if(strcmp(cmd, "df 6 off") == 0){
+        //kprintf("cmd =%sstop here\n", cmd);
+        dbflags = dbflags - DB_VM;
+		kprintf("Operation took %lu.%09lu seconds\n",(unsigned long) secs,(unsigned long) nsecs);
+        result = 0;
+        return result;
+    }
+    if(strcmp(cmd, "df 7 off") == 0){
+        //kprintf("cmd =%sstop here\n", cmd);
+        dbflags = dbflags - DB_EXEC;
+		kprintf("Operation took %lu.%09lu seconds\n",(unsigned long) secs,(unsigned long) nsecs);
+        result = 0;
+        return result;
+    }
+    if(strcmp(cmd, "df 8 off") == 0){
+        //kprintf("cmd =%sstop here\n", cmd);
+        dbflags = dbflags - DB_VFS;
+		kprintf("Operation took %lu.%09lu seconds\n",(unsigned long) secs,(unsigned long) nsecs);
+        result = 0;
+        return result;
+    }
+    if(strcmp(cmd, "df 9 off") == 0){
+        //kprintf("cmd =%sstop here\n", cmd);
+        dbflags = dbflags - DB_SFS;
+		kprintf("Operation took %lu.%09lu seconds\n",(unsigned long) secs,(unsigned long) nsecs);
+        result = 0;
+        return result;
+    }
+    if(strcmp(cmd, "df 10 off") == 0){
+        //kprintf("cmd =%sstop here\n", cmd);
+        dbflags = dbflags - DB_NET;
+		kprintf("Operation took %lu.%09lu seconds\n",(unsigned long) secs,(unsigned long) nsecs);
+        result = 0;
+        return result;
+    }
+    if(strcmp(cmd, "df 11 off") == 0){
+        //kprintf("cmd =%sstop here\n", cmd);
+        dbflags = dbflags - DB_NETFS;
+		kprintf("Operation took %lu.%09lu seconds\n",(unsigned long) secs,(unsigned long) nsecs);
+        result = 0;
+        return result;
+    }
+    if(strcmp(cmd, "df 12 off") == 0){
+        //kprintf("cmd =%sstop here\n", cmd);
+        dbflags = dbflags - DB_KMALLOC;
+		kprintf("Operation took %lu.%09lu seconds\n",(unsigned long) secs,(unsigned long) nsecs);
+        result = 0;
+        return result;
+    }
+    //glen
 	for (word = strtok_r(cmd, " \t", &context);
 	     word != NULL;
 	     word = strtok_r(NULL, " \t", &context)) {
