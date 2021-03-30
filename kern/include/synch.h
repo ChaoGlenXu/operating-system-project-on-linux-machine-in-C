@@ -51,6 +51,12 @@ void              sem_destroy(struct semaphore *);
 struct lock {
 	char *name;
 	// add what you need here
+
+    //glen code below
+    int lab2_lock;//disable all the interrupts
+    int lecture_held;
+    //glen code above 
+
 	// (don't forget to mark things volatile as needed)
 };
 

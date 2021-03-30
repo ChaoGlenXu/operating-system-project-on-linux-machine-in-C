@@ -11,9 +11,7 @@
 #include <machine/spl.h>
 
 
-//glen code below
-int lab2_lock;//disable all the interrupts
-//glen code above 
+
 
 
 
@@ -123,6 +121,9 @@ lock_create(const char *name)
 	}
 	
 	// add stuff here as needed
+    //glen code below
+    lock->lecture_held = 0;
+    //glen code above
 	
 	return lock;
 }
@@ -143,7 +144,19 @@ lock_acquire(struct lock *lock)
 {
 	// Write this
     //glen code below
-    lab2_lock = splhigh();//disable all the interrupts
+    //interrupts_on();
+     
+    int lecture_spl; 
+    lecture_spl = splhigh();//within this, this act like atomic instruction
+    
+    while(lock->lecture_held == 1){ ; }
+    lock->lecture_held = 1;
+
+    splx(lecture_spl);
+    
+
+    //lock->lab2_lock = splhigh();//disable all the interrupts
+    
     //glen code above    
 	(void)lock;  // suppress warning until code gets written
 }
@@ -153,7 +166,13 @@ lock_release(struct lock *lock)
 {
 	// Write this
     //glen code below
-    
+    //interrupts_off();
+    int lecture_spl; 
+    lecture_spl = splhigh(); //within this, this act like atomic instruction
+    lock->lecture_held = 0;
+    splx(lecture_spl);
+
+    //splx(lock->lab2_lock);
     //glen code above
 	(void)lock;  // suppress warning until code gets written
 }
@@ -162,9 +181,13 @@ int
 lock_do_i_hold(struct lock *lock)
 {
 	// Write this
+    //glen code below
+    if(lock->lecture_held == 1){return 1;}
+    else{return 0;}
+    //glen code above
 
 	(void)lock;  // suppress warning until code gets written
-    splx(lab2_lock);
+    
 	return 1;    // dummy until code gets written
 }
 
