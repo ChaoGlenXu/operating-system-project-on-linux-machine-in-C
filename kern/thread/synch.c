@@ -10,6 +10,14 @@
 #include <curthread.h>
 #include <machine/spl.h>
 
+
+//glen code below
+int lab2_lock;//disable all the interrupts
+//glen code above 
+
+
+
+
 ////////////////////////////////////////////////////////////
 //
 // Semaphore.
@@ -134,7 +142,9 @@ void
 lock_acquire(struct lock *lock)
 {
 	// Write this
-
+    //glen code below
+    lab2_lock = splhigh();//disable all the interrupts
+    //glen code above    
 	(void)lock;  // suppress warning until code gets written
 }
 
@@ -142,7 +152,9 @@ void
 lock_release(struct lock *lock)
 {
 	// Write this
-
+    //glen code below
+    
+    //glen code above
 	(void)lock;  // suppress warning until code gets written
 }
 
@@ -152,7 +164,7 @@ lock_do_i_hold(struct lock *lock)
 	// Write this
 
 	(void)lock;  // suppress warning until code gets written
-
+    splx(lab2_lock);
 	return 1;    // dummy until code gets written
 }
 
