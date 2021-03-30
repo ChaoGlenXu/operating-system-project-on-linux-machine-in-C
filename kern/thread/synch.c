@@ -87,7 +87,7 @@ P(struct semaphore *sem)
 	sem->count--;
 	splx(spl);
 }
-
+//thread A currently runing, called p, thread B 
 void
 V(struct semaphore *sem)
 {
@@ -144,8 +144,29 @@ lock_acquire(struct lock *lock)
 {
 	// Write this
     //glen code below
+
+	int spl;
+	assert(lock != NULL);
+
+	/*
+	 * May not block in an interrupt handler.
+	 *
+	 * For robustness, always check, even if we can actually
+	 * complete the P without blocking.
+	 */
+	//assert(in_interrupt==0);
+
+	spl = splhigh();
+	while (lock->lecture_held==1) {
+		thread_sleep(lock);
+	}
+    lock->lecture_held = 1; 
+	splx(spl);
+
+
+
     //interrupts_on();
-     
+/*   
     int lecture_spl; 
     lecture_spl = splhigh();//within this, this act like atomic instruction
     
@@ -154,7 +175,7 @@ lock_acquire(struct lock *lock)
 
     splx(lecture_spl);
     
-
+*/
     //lock->lab2_lock = splhigh();//disable all the interrupts
     
     //glen code above    
@@ -170,6 +191,7 @@ lock_release(struct lock *lock)
     int lecture_spl; 
     lecture_spl = splhigh(); //within this, this act like atomic instruction
     lock->lecture_held = 0;
+	thread_wakeup(lock);
     splx(lecture_spl);
 
     //splx(lock->lab2_lock);
@@ -184,6 +206,7 @@ lock_do_i_hold(struct lock *lock)
     //glen code below
     if(lock->lecture_held == 1){return 1;}
     else{return 0;}
+    //return (curthread)
     //glen code above
 
 	(void)lock;  // suppress warning until code gets written

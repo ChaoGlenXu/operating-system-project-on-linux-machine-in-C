@@ -166,11 +166,11 @@ locktestthread(void *junk, unsigned long num)
 int
 locktest(int nargs, char **args)
 {
-    //glen code below
+    /*//glen code below
     kprintf(" \n");
     kprintf("hello lab2 \n");
     kprintf(" \n");
-    //glen code above
+    *///glen code above
 	int i, result;
 
 	(void)nargs;
