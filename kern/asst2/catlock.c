@@ -24,8 +24,8 @@ struct lock *two_cat_dishs;
 int lab2_mouse = 0;
 int lab2_cats = 0;
 int current_food_available = 2;
-int food_0 = 0;
-int food_1 = 1;
+int food_0 = 1;
+int food_1 = 2;
 int current_food_being_eaten = 0;
 //glen code above
 
@@ -127,7 +127,7 @@ mouselock(void * unusedpointer,
             //current_food_available--;
             }else{//not mose present
                //lock_acquire(two_cat_dishs); 
-                //this case, only one cat can be present at a time
+                //this case, only one mouse can be present at a time
                 lab2_mouse ++; 
                 current_food_available --;
                 if(current_food_being_eaten == food_0){
