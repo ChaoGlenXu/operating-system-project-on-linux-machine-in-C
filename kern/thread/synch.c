@@ -236,6 +236,9 @@ cv_create(const char *name)
 	}
 	
 	// add stuff here as needed
+    //glen code below
+    //cv->the_conditional_variable = 0;
+    //glen code above
 	
 	return cv;
 }
@@ -255,6 +258,15 @@ void
 cv_wait(struct cv *cv, struct lock *lock)
 {
 	// Write this
+
+    //glen code below
+    int lecture_spl = splhigh();
+    lock_release(lock);
+    thread_sleep(cv);    
+    lock_acquire(lock);
+    splx(lecture_spl); 
+    //glen code above
+
 	(void)cv;    // suppress warning until code gets written
 	(void)lock;  // suppress warning until code gets written
 }
@@ -263,7 +275,16 @@ void
 cv_signal(struct cv *cv, struct lock *lock)
 {
 	// Write this
-	(void)cv;    // suppress warning until code gets written
+
+    //glen code below
+    int lecture_spl = splhigh();
+    //lock_acquire(lock);
+    lab2_thread_wakeup_one_only(cv); 
+    //lock_release(lock);
+    splx(lecture_spl);   
+    //glen code above
+
+	//(void)cv;    // suppress warning until code gets written
 	(void)lock;  // suppress warning until code gets written
 }
 
@@ -271,6 +292,13 @@ void
 cv_broadcast(struct cv *cv, struct lock *lock)
 {
 	// Write this
-	(void)cv;    // suppress warning until code gets written
+
+    //glen code below
+    int lecture_spl = splhigh();
+    thread_wakeup(cv); 
+    splx(lecture_spl);    
+    //glen code above
+
+	//(void)cv;    // suppress warning until code gets written
 	(void)lock;  // suppress warning until code gets written
 }

@@ -96,6 +96,11 @@ void         lock_destroy(struct lock *);
 struct cv {
 	char *name;
 	// add what you need here
+
+    //glen code below
+    //int the_conditional_variable; //if 1 then wait, if 0 then signal
+    //glen code above
+
 	// (don't forget to mark things volatile as needed)
 };
 
