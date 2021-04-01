@@ -263,7 +263,6 @@ cv_wait(struct cv *cv, struct lock *lock)
     int lecture_spl = splhigh();
     lock_release(lock);
     thread_sleep(cv);    
-    lock_acquire(lock);
     splx(lecture_spl); 
     //glen code above
 
@@ -278,13 +277,12 @@ cv_signal(struct cv *cv, struct lock *lock)
 
     //glen code below
     int lecture_spl = splhigh();
-    //lock_acquire(lock);
+    lock_acquire(lock);
     lab2_thread_wakeup_one_only(cv); 
-    //lock_release(lock);
     splx(lecture_spl);   
     //glen code above
 
-	//(void)cv;    // suppress warning until code gets written
+	(void)cv;    // suppress warning until code gets written
 	(void)lock;  // suppress warning until code gets written
 }
 
@@ -299,6 +297,6 @@ cv_broadcast(struct cv *cv, struct lock *lock)
     splx(lecture_spl);    
     //glen code above
 
-	//(void)cv;    // suppress warning until code gets written
+	(void)cv;    // suppress warning until code gets written
 	(void)lock;  // suppress warning until code gets written
 }

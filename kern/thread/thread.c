@@ -591,12 +591,7 @@ lab2_thread_wakeup_one_only(const void *addr)
 			 */
 			result = make_runnable(t);
 			assert(result==0);
-            kprintf(" -------------------------------------------------\n");
-            kprintf(" \n");
-            kprintf("first went over lab2_thread_wakeup_one_only \n");
-            kprintf(" \n");
-            kprintf("----------------------------------------------------- \n");
-            break;
+            break;//lab 2 cv passed all the test
 		}
 	}
 }
