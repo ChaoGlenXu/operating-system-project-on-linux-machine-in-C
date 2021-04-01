@@ -18,6 +18,17 @@
 #include <thread.h>
 #include "catmouse.h"
 
+//glen code below
+#include <synch.h>
+struct lock *two_cat_dishs;
+int lab2_mouse = 0;
+int lab2_cats = 0;
+int current_food_available = 2;
+int food_0 = 0;
+int food_1 = 1;
+int current_food_being_eaten = 0;
+//glen code above
+
 /*
  * 
  * Function Definitions
@@ -49,6 +60,32 @@ catlock(void * unusedpointer,
          * Avoid unused variable warnings.
          */
 
+        //glen code below
+        //struct lock *two_cat_dishs;
+        int i;
+        for (i = 0; i < NMEALS; i++){
+            lock_acquire(two_cat_dishs);
+            
+            if(lab2_mouse > 0){
+                lock_release(two_cat_dishs);
+            //current_food_available--;
+            }else{//not mose present
+               //lock_acquire(two_cat_dishs); 
+                //this case, only one cat can be present at a time
+                lab2_cats ++; 
+                current_food_available --;
+                if(current_food_being_eaten == food_0){
+                     current_food_being_eaten = food_1;       
+                }else{current_food_being_eaten = food_0;}
+                catmouse_eat("cat", catnumber, current_food_being_eaten, i);
+                lab2_cats --;
+                current_food_available++;
+                lock_release(two_cat_dishs);
+            }
+        }
+        //glen code above
+
+
         (void) unusedpointer;
         (void) catnumber;
 }
@@ -78,6 +115,30 @@ mouselock(void * unusedpointer,
         /*
          * Avoid unused variable warnings.
          */
+
+        //glen code below
+        //struct lock *two_cat_dishs;
+        int i;
+        for (i = 0; i < NMEALS; i++){
+            lock_acquire(two_cat_dishs);
+            
+            if(lab2_cats > 0){
+                lock_release(two_cat_dishs);
+            //current_food_available--;
+            }else{//not mose present
+               //lock_acquire(two_cat_dishs); 
+                //this case, only one cat can be present at a time
+                lab2_mouse ++; 
+                current_food_available --;
+                if(current_food_being_eaten == food_0){
+                     current_food_being_eaten = food_1;       
+                }else{current_food_being_eaten = food_0;}
+                catmouse_eat("mouse", mousenumber, current_food_being_eaten, i);
+                lab2_mouse --;
+                lock_release(two_cat_dishs);
+            }
+        }
+        //glen code above
         
         (void) unusedpointer;
         (void) mousenumber;
@@ -108,7 +169,12 @@ catmouselock(int nargs,
         /*
          * Start NCATS catlock() threads.
          */
+        
+        //glen code below
+            two_cat_dishs = lock_create("two_cat_dishs");
+        //glen code above 
 
+    
         for (index = 0; index < NCATS; index++) {
            
                 error = thread_fork("catlock thread", 
