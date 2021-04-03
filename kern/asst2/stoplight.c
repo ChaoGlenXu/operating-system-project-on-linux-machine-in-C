@@ -17,7 +17,9 @@
 #include <test.h>
 #include <thread.h>
 
-
+//glen coded below
+#include <synch.h>
+//glen coded above
 
 /*
  * Number of cars created.
