@@ -27,6 +27,13 @@
 
 #define NCARS 20
 
+//glen coded below
+//global variables for maintainance
+struct semaphore *ne_1;
+struct semaphore *nw_2;
+struct semaphore *sw_3;
+struct semaphore *se_4 ;
+//glen coded above
 
 /*
  *
@@ -214,6 +221,15 @@ createcars(int nargs,
 {
         int index, error;
     
+        //glen coded below
+        int initial_semaphore_number = 1; //if the count is 1, then the semaphore is unlocked
+        ne_1 =sem_create("ne_1", initial_semaphore_number);
+        nw_2 =sem_create("nw_2", initial_semaphore_number);
+        sw_3 =sem_create("sw_3", initial_semaphore_number);
+        se_4 =sem_create("se_4", initial_semaphore_number);
+        //glen coded above
+
+
         /*
          * Start NCARS approachintersection() threads.
          */
