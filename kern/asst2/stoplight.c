@@ -33,6 +33,7 @@ struct semaphore *ne_1;
 struct semaphore *nw_2;
 struct semaphore *sw_3;
 struct semaphore *se_4 ;
+struct semaphore *lock_all_four_quadrant;
 //glen coded above
 
 /*
@@ -88,6 +89,20 @@ gostraight(unsigned long cardirection,
          * Avoid unused variable warnings.
          */
         
+        //glen coded below
+        P(lock_all_four_quadrant);
+        if(cardirection == 0){//from north
+            ;
+        }else if(cardirection == 1){//from east
+            ;
+        }else if(cardirection == 2){//from south
+            ;
+        }else if(cardirection == 3){//from west
+            ;
+        }
+        V(lock_all_four_quadrant);
+        //glen coded above            
+
         (void) cardirection;
         (void) carnumber;
 }
@@ -119,6 +134,20 @@ turnleft(unsigned long cardirection,
          * Avoid unused variable warnings.
          */
 
+        //glen coded below
+        P(lock_all_four_quadrant);
+        if(cardirection == 0){//from north
+            ;
+        }else if(cardirection == 1){//from east
+            ;
+        }else if(cardirection == 2){//from south
+            ;
+        }else if(cardirection == 3){//from west
+            ;
+        }
+        V(lock_all_four_quadrant);
+        //glen coded above      
+
         (void) cardirection;
         (void) carnumber;
 }
@@ -149,6 +178,20 @@ turnright(unsigned long cardirection,
         /*
          * Avoid unused variable warnings.
          */
+
+        //glen coded below
+        P(lock_all_four_quadrant);
+        if(cardirection == 0){//from north
+            ;
+        }else if(cardirection == 1){//from east
+            ;
+        }else if(cardirection == 2){//from south
+            ;
+        }else if(cardirection == 3){//from west
+            ;
+        }
+        V(lock_all_four_quadrant);
+        //glen coded above      
 
         (void) cardirection;
         (void) carnumber;
@@ -242,6 +285,7 @@ createcars(int nargs,
         nw_2 =sem_create("nw_2", initial_semaphore_number);
         sw_3 =sem_create("sw_3", initial_semaphore_number);
         se_4 =sem_create("se_4", initial_semaphore_number);
+        lock_all_four_quadrant = sem_create("lock_all_four_quadrant", initial_semaphore_number);
         //glen coded above
 
 
