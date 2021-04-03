@@ -34,6 +34,11 @@ struct semaphore *nw_2;
 struct semaphore *sw_3;
 struct semaphore *se_4 ;
 struct semaphore *lock_all_four_quadrant;
+int does_not_matter_number = 1;
+int north = 0;
+int east = 1;
+int south = 2;
+int west = 3;
 //glen coded above
 
 /*
@@ -88,11 +93,15 @@ gostraight(unsigned long cardirection,
         /*
          * Avoid unused variable warnings.
          */
+       
         
         //glen coded below
         P(lock_all_four_quadrant);
         if(cardirection == 0){//from north
-            ;
+            message(APPROACHING, carnumber, cardirection, south);
+            message(REGION2, carnumber, cardirection, south);
+            message(REGION3, carnumber, cardirection, south);
+            message(LEAVING, carnumber, cardirection, south);
         }else if(cardirection == 1){//from east
             ;
         }else if(cardirection == 2){//from south
