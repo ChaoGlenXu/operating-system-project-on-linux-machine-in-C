@@ -155,13 +155,29 @@ turnleft(unsigned long cardirection,
         //glen coded below
         P(lock_all_four_quadrant);
         if(cardirection == 0){//from north
-            ;
+            message(APPROACHING, carnumber, cardirection, east);
+            message(REGION1, carnumber, cardirection, east);
+            message(REGION2, carnumber, cardirection, east);
+            message(REGION3, carnumber, cardirection, east);
+            message(LEAVING, carnumber, cardirection, east);
         }else if(cardirection == 1){//from east
-            ;
+            message(APPROACHING, carnumber, cardirection, south);
+            message(REGION1, carnumber, cardirection, south);
+            message(REGION2, carnumber, cardirection, south);
+            message(REGION3, carnumber, cardirection, south);
+            message(LEAVING, carnumber, cardirection, south);
         }else if(cardirection == 2){//from south
-            ;
+            message(APPROACHING, carnumber, cardirection, west);
+            message(REGION1, carnumber, cardirection, west);
+            message(REGION2, carnumber, cardirection, west);
+            message(REGION3, carnumber, cardirection, west);
+            message(LEAVING, carnumber, cardirection, west);
         }else if(cardirection == 3){//from west
-            ;
+            message(APPROACHING, carnumber, cardirection, north);
+            message(REGION1, carnumber, cardirection, north);
+            message(REGION2, carnumber, cardirection, north);
+            message(REGION3, carnumber, cardirection, north);
+            message(LEAVING, carnumber, cardirection, north);
         }
         V(lock_all_four_quadrant);
         //glen coded above      
@@ -200,13 +216,21 @@ turnright(unsigned long cardirection,
         //glen coded below
         P(lock_all_four_quadrant);
         if(cardirection == 0){//from north
-            ;
+            message(APPROACHING, carnumber, cardirection, west);
+            message(REGION1, carnumber, cardirection, west);
+            message(LEAVING, carnumber, cardirection, west);
         }else if(cardirection == 1){//from east
-            ;
+            message(APPROACHING, carnumber, cardirection, north);
+            message(REGION1, carnumber, cardirection, north);
+            message(LEAVING, carnumber, cardirection, north);
         }else if(cardirection == 2){//from south
-            ;
+            message(APPROACHING, carnumber, cardirection, east);
+            message(REGION1, carnumber, cardirection, east);
+            message(LEAVING, carnumber, cardirection, east);
         }else if(cardirection == 3){//from west
-            ;
+            message(APPROACHING, carnumber, cardirection, south);
+            message(REGION1, carnumber, cardirection, south);
+            message(LEAVING, carnumber, cardirection, south);
         }
         V(lock_all_four_quadrant);
         //glen coded above      
