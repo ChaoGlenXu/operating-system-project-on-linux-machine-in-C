@@ -196,7 +196,22 @@ approachintersection(void * unusedpointer,
          * cardirection is set randomly.
          */
 
-        cardirection = random() % 4;
+        cardirection = random() % 4; 
+        //glen coded below
+        // car direction is that the car approach from N = 0, E = 1, S = 2, W = 3
+        
+        int destination_direction = (random()+random())%3;
+        //if destination_direction = 0, go straight
+        //if destination_direction = 1, turn right
+        //if destination_direction = 2, turn left
+
+        if(destination_direction == 0){ gostraight(cardirection, carnumber);}
+        else if(destination_direction == 1){ turnright(cardirection, carnumber);}
+        else if(destination_direction == 2){ turnleft(cardirection, carnumber);}
+
+        
+        //glen coded above    
+        
 }
 
 
@@ -255,10 +270,14 @@ createcars(int nargs,
         while (thread_count() > 1)
                 thread_yield();
 
-	(void)message;
+	    (void)message;
         (void)nargs;
         (void)args;
         kprintf("stoplight test done\n");
+        //glen coded below
+        //kprintf("%d \n",random());
+        //glen coded above
+        
         return 0;
 }
 
