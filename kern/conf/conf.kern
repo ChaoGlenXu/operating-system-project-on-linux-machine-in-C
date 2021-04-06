@@ -451,3 +451,8 @@ file		test/synchtest.c
 file		test/malloctest.c
 file		test/fstest.c
 optfile net	test/nettest.c
+
+# glen files below
+file        lab3_sys_calls/sys_exit.c
+#glen files above
+

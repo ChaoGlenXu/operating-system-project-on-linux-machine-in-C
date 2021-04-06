@@ -7,5 +7,8 @@
 
 int sys_reboot(int code);
 
+//glen coded below
+int sys_exit(struct trapframe *tf, int32_t *retval);//return int err
+//glen coded above
 
 #endif /* _SYSCALL_H_ */

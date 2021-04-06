@@ -8,6 +8,13 @@
 #include <syscall.h>
 
 
+//glen coded below
+//#include <sy_exit.c>
+//#include "sy_exit.c"
+//void sys_exit(struct trapframe *tf, int32_t *retval, int *err);
+//glen coded above
+
+
 /*
  * System call handler.
  *
@@ -76,7 +83,11 @@ mips_syscall(struct trapframe *tf)
  
         //glen coded below
         case SYS__exit:
-		//err = SYS__exit(tf->tf_a0);
+		//err = sys_exit(&tf, &retval); is the &tf the pass by reference of the pointer
+		err = sys_exit(tf, &retval); //or (tf, retval, err) //a_0 sin
+        // int *status = (int *)tf->tf_a1;
+        // copyout: copy from kernelspace "out" to userspace
+        // copyin: copy from userpsace "in" to kernelspace
 		break;
         //glen coded above
 
@@ -125,3 +136,15 @@ md_forkentry(struct trapframe *tf)
 
 	(void)tf;
 }
+
+
+
+
+
+
+
+
+
+
+
+
