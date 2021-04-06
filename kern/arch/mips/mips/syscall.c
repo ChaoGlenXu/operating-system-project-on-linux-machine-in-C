@@ -84,10 +84,21 @@ mips_syscall(struct trapframe *tf)
         //glen coded below
         case SYS__exit:
 		//err = sys_exit(&tf, &retval); is the &tf the pass by reference of the pointer
-		err = sys_exit(tf, &retval); //or (tf, retval, err) //a_0 sin
+		err = sys_exit(tf, &retval); //or (tf, retval, err) //a_0 sin //&tf address of the pointer
         // int *status = (int *)tf->tf_a1;
         // copyout: copy from kernelspace "out" to userspace
         // copyin: copy from userpsace "in" to kernelspace
+		break;
+
+        case SYS_write:
+		err = sys_write(tf, &retval); //or (tf, retval, err) //a_0 sin
+		break;
+
+        case SYS_sleep:
+		err = sys_sleep(tf, &retval); //or (tf, retval, err) //a_0 sin
+		break;
+        case SYS___time:
+		err = sys_time(tf, &retval); //or (tf, retval, err) //a_0 sin
 		break;
         //glen coded above
 
