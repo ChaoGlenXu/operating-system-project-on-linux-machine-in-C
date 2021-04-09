@@ -32,6 +32,16 @@ int sys_write(struct trapframe *tf, int32_t *retval){
     (void) retval;  
     //thread_yield();
     //thread_sleep(const void *addr);
+    //size_t size = tf->tf_a2;
+    int the_fd_value = tf->tf_a0;
+    if((the_fd_value == 1 )||(the_fd_value == 2) ){ //assume 1 is write
+        //void *new_dynamic_data = kmalloc(size);
+
+        //strcpy(new_dynamic_data, buf); //
+        //copyout((int *)tf->tf_a1, new_dynamic_data, size);  
+        kprintf("%s", (char *)tf->tf_a1);  //  void *  
+    }
+
     return 0;
 }
 //glen coded above

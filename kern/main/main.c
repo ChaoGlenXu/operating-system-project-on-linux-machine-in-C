@@ -72,6 +72,7 @@ boot(void)
 
 	ram_bootstrap();
 	scheduler_bootstrap();
+    //glen has to do it here to initialzie the pid array!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 	thread_bootstrap();
 	vfs_bootstrap();
 	dev_bootstrap();

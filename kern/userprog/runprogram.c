@@ -46,6 +46,7 @@ runprogram(char *progname)
 
 	/* Activate it. */
 	as_activate(curthread->t_vmspace);
+//glen has to use copyout the args to userspace for execv
 
 	/* Load the executable. */
 	result = load_elf(v, &entrypoint);

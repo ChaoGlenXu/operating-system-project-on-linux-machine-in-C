@@ -76,7 +76,9 @@ cmd_progthread(void *ptr, unsigned long nargs)
 	assert(strlen(args[0]) < sizeof(progname));
 
 	strcpy(progname, args[0]);
-
+    //glen coded below
+    //result = runprogram(progname, nargs); lab 3 execv, have to change the prototype
+    //glen coded above
 	result = runprogram(progname);
 	if (result) {
 		kprintf("Running program %s failed: %s\n", args[0],

@@ -30,7 +30,39 @@ struct thread {
 	 * and will need to be manipulated by the userprog and/or vm
 	 * code.
 	 */
-	struct addrspace *t_vmspace;
+	struct addrspace *t_vmspace; //glen: thread virtual memory space
+
+
+
+//glen: wait pid need synchronizeation: ex lock  or directly call thread sleep
+
+//TA advice below
+// waitpid(<pid>)
+// parent pid = 0; child1 /* pid = 1*/ = fork(); child2 /* pid = 2*/ = fork(); waitpid(child0);
+
+// in the parnet yo ucall waitpid(child)
+// 2 posibilities (assuming no incorrect input):
+//  1. child is still running, so the parent must wait (thread_sleep(child))
+//  2. child is finished running, so waitpid doesn't wait and returns the status code
+
+
+// fork
+// 1. copy the virtual address space (call as_copy)
+// 2. create the new child process
+//    a. allocate a new pid for the child
+//    b. use thread_fork to create a new os161 thread with md_forkentry as a parameter
+//    c. copy the trapframe (duplicate parent trapframe)
+// 3. activate the child address space when the child is running
+// 4. call mips_usermode
+
+// execv
+// 1. copy the arguments from userspace into the kernel
+// 2. as_destroy old address space
+// 3. call runprogram
+
+//TA advice above
+
+
 
 	/*
 	 * This is public because it isn't part of the thread system,
