@@ -105,6 +105,18 @@ mips_syscall(struct trapframe *tf)
         case SYS_read:
 		err = sys_read(tf, &retval); //or (tf, retval, err) //a_0 sin
 		break;
+
+        case SYS_fork:
+		err = sys_fork(tf, &retval); //or (tf, retval, err) //a_0 sin
+		break;
+
+        case SYS_getpid:
+		err = sys_getpid(tf, &retval); //or (tf, retval, err) //a_0 sin
+		break;
+
+        case SYS_waitpid:
+		err = sys_waitpid(tf, &retval); //or (tf, retval, err) //a_0 sin
+		break;
         //glen coded above
 
 	    default:

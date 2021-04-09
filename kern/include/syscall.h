@@ -13,6 +13,9 @@ int sys_write(struct trapframe *tf, int32_t *retval);
 int sys_sleep(struct trapframe *tf, int32_t *retval);
 int sys_time(struct trapframe *tf, int32_t *retval);
 int sys_read(struct trapframe *tf, int32_t *retval);
+int sys_fork(struct trapframe *tf, int32_t *retval);
+int sys_getpid(struct trapframe *tf, int32_t *retval);
+int sys_waitpid(struct trapframe *tf, int32_t *retval);
 //sysCall.h   syscall.h
 //glen coded above
 

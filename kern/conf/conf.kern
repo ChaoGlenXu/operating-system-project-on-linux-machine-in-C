@@ -458,5 +458,8 @@ file        lab3_sys_calls/sys_write.c
 file        lab3_sys_calls/sys_sleep.c
 file        lab3_sys_calls/sys_time.c
 file        lab3_sys_calls/sys_read.c
+file        lab3_sys_calls/sys_fork.c
+file        lab3_sys_calls/sys_getpid.c
+file        lab3_sys_calls/sys_waitpid.c
 #glen files above
 
