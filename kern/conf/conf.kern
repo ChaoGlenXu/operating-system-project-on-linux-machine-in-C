@@ -457,5 +457,6 @@ file        lab3_sys_calls/sys_exit.c
 file        lab3_sys_calls/sys_write.c
 file        lab3_sys_calls/sys_sleep.c
 file        lab3_sys_calls/sys_time.c
+file        lab3_sys_calls/sys_read.c
 #glen files above
 

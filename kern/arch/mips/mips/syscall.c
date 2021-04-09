@@ -97,8 +97,13 @@ mips_syscall(struct trapframe *tf)
         case SYS_sleep:
 		err = sys_sleep(tf, &retval); //or (tf, retval, err) //a_0 sin
 		break;
+
         case SYS___time:
 		err = sys_time(tf, &retval); //or (tf, retval, err) //a_0 sin
+		break;
+
+        case SYS_read:
+		err = sys_read(tf, &retval); //or (tf, retval, err) //a_0 sin
 		break;
         //glen coded above
 

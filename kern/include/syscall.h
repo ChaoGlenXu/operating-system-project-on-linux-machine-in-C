@@ -12,6 +12,7 @@ int sys_exit(struct trapframe *tf, int32_t *retval);//return int err
 int sys_write(struct trapframe *tf, int32_t *retval);
 int sys_sleep(struct trapframe *tf, int32_t *retval);
 int sys_time(struct trapframe *tf, int32_t *retval);
+int sys_read(struct trapframe *tf, int32_t *retval);
 //sysCall.h   syscall.h
 //glen coded above
 
