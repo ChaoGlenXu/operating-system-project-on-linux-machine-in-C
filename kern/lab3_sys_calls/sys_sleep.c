@@ -31,7 +31,8 @@ int sys_sleep(struct trapframe *tf, int32_t *retval){
     (void) tf;
     (void) retval;  
     //thread_sleep(address); use clock sleep
-    //clocksleep(int num_secs);
+    int seconds = (int)tf->tf_a0;
+    clocksleep( seconds);
     return 0;
 }
 //glen coded above
