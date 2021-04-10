@@ -43,10 +43,20 @@ int sys_read(struct trapframe *tf, int32_t *retval){
     size_t local_buflen = (size_t) tf->tf_a2;
     char *the_string_needed_to_put_into_buffer;
     //void * returned_buffer;
+
+
+
+
     if(the_fd_value == STDIN_FILENO ){ // 0 is read based on the unistd.h
         the_string_needed_to_put_into_buffer = kmalloc(local_buflen);
         //glen has a idea, if sys_read has kprintf, then this should be kgets// kgets read a string off the console.
-        kgets((char *)the_string_needed_to_put_into_buffer, (size_t) local_buflen);
+        //kgets((char *)the_string_needed_to_put_into_buffer, (size_t) local_buflen);//kgets() will always cause problem for the lab3 , so decided use the getch()
+        int i = 0;        
+        while (i != (int)local_buflen) {
+		the_string_needed_to_put_into_buffer[i] = getch();
+        i++;
+		}
+
         copyout((const void *) the_string_needed_to_put_into_buffer, (userptr_t) local_buffer, (size_t) local_buflen);
         //copyin((const_userptr_t) the_string_needed_to_put_into_buffer, local_buffer, local_buflen);
         *retval =  local_buflen;
