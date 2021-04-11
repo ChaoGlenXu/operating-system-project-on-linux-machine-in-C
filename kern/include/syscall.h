@@ -16,6 +16,7 @@ int sys_read(struct trapframe *tf, int32_t *retval);
 int sys_fork(struct trapframe *tf, int32_t *retval);
 int sys_getpid(struct trapframe *tf, int32_t *retval);
 int sys_waitpid(struct trapframe *tf, int32_t *retval);
+void glen_lab3_forkentry(void *data1, unsigned long data2);
 //sysCall.h   syscall.h
 //glen coded above
 

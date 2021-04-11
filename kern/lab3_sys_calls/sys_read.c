@@ -43,10 +43,25 @@ int sys_read(struct trapframe *tf, int32_t *retval){
     size_t local_buflen = (size_t) tf->tf_a2;
     char *the_string_needed_to_put_into_buffer;
     //void * returned_buffer;
+ /*   
+    if(local_buffer == NULL){ 
+        // *retval = -1;
+        return EFAULT;
+    }
 
-
-
-
+    if ((char *)local_buflen == (char *)0xbadbeef ) {
+        // *retval = -1;
+        return EFAULT;
+    }
+    if((char *)local_buflen == (char *)0xdeadbeef){ 
+        // *retval = -1;
+        return EFAULT;
+    }
+    if(the_fd_value == STDIN_FILENO ){
+        // *retval = -1;
+        return EBADF;
+    }
+*/
     if(the_fd_value == STDIN_FILENO ){ // 0 is read based on the unistd.h
         the_string_needed_to_put_into_buffer = kmalloc(local_buflen);
         //glen has a idea, if sys_read has kprintf, then this should be kgets// kgets read a string off the console.

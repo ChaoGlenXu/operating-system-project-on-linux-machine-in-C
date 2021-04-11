@@ -162,10 +162,29 @@ md_forkentry(struct trapframe *tf)
 	 * Thus, you can trash it and do things another way if you prefer.
 	 */
 
+    //glen coded below
+    
+    //glen coded above
 	(void)tf;
 }
 
 
+void
+glen_lab3_forkentry(void *data1, unsigned long data2)//glens' idea for new forkentry and fork
+{
+	/*
+	 * This function is provided as a reminder. You need to write
+	 * both it and the code that calls it.
+	 *
+	 * Thus, you can trash it and do things another way if you prefer.
+	 */
+
+    //glen coded below
+    (void )data1;
+    (void)data2;
+    //glen coded above
+	
+}
 
 
 

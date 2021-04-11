@@ -35,6 +35,16 @@ int sys_write(struct trapframe *tf, int32_t *retval){
     //size_t size = tf->tf_a2;
     int the_fd_value = tf->tf_a0;
     size_t local_buflen = (size_t) tf->tf_a2;
+ /*   size_t nbytes = (size_t) tf->tf_a3;
+    if (nbytes <= 0) {
+        // *retval = -1;
+        return EFAULT;
+    }
+    if((the_fd_value != 1 )&&(the_fd_value != 2) ){
+        // *retval = -1;
+        return EBADF;
+    }
+*/
     if((the_fd_value == 1 )||(the_fd_value == 2) ){ //assume 1 is write
         //void *new_dynamic_data = kmalloc(size);
 

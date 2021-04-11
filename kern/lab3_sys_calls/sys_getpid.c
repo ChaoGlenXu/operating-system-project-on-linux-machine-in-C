@@ -43,8 +43,8 @@
 int sys_getpid(struct trapframe *tf, int32_t *retval){
     (void) tf;
     (void) retval;  
-    (void) tf;
-	//*retval = (pid_t) curthread->thread_pid;
+    
+	*retval = (pid_t) curthread->lab3_thread_pid;
     return 0;
 }
 //glen coded above
