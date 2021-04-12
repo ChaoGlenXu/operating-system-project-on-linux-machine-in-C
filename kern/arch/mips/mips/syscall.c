@@ -12,6 +12,18 @@
 //#include <sy_exit.c>
 //#include "sy_exit.c"
 //void sys_exit(struct trapframe *tf, int32_t *retval, int *err);
+#include <types.h>
+#include <lib.h>
+#include <kern/errno.h>
+#include <array.h>
+#include <machine/spl.h>
+#include <machine/pcb.h>
+#include <thread.h>
+#include <curthread.h>
+#include <scheduler.h>
+#include <addrspace.h>
+#include <vnode.h>
+#include "opt-synchprobs.h"
 //glen coded above
 
 
@@ -180,8 +192,19 @@ glen_lab3_forkentry(void *data1, unsigned long data2)//glens' idea for new forke
 	 */
 
     //glen coded below
-    (void )data1;
-    (void)data2;
+    (void )data1; //data1 is child address space
+    (void)data2; //data2 is the parent trapframe 
+
+    curthread->t_vmspace = (struct addrspace *)data1; 
+    as_activate( (struct addrspace *)data1 );
+
+    struct trapframe child_tf;
+    child_tf = *(    (struct trapframe *)data2  );
+    child_tf.tf_v0 = 0;
+    child_tf.tf_a3 = 0;
+    child_tf.tf_epc = (child_tf.tf_epc) + 4; //glen: the epc is the program counter, If system is 32 -bit the size would be 4 bytes for all the pointers.
+    
+    mips_usermode(&child_tf);//continue the process, transfer the control of the process to user mode
     //glen coded above
 	
 }

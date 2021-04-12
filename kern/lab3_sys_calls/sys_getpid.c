@@ -36,8 +36,8 @@
 #include <curthread.h>
 #include <lamebus/ltrace.h>
 
-//Description
-//Cause the current process to exit. The exit code exitcode is reported back to other process(es) via the waitpid() call. The process id of the exiting process should not be reused until all processes interested in collecting the exit code with waitpid have done so. (What "interested" means is intentionally left vague; you should design this.) 
+//struct lab3_thread_pid_management *the_pid_system;
+
 
 //return int err
 int sys_getpid(struct trapframe *tf, int32_t *retval){
@@ -47,6 +47,18 @@ int sys_getpid(struct trapframe *tf, int32_t *retval){
 	*retval = (pid_t) curthread->lab3_thread_pid;
     return 0;
 }
+
+
+
+//the code below are not syscall but the functions for managment of thread pid system
+void initialize_pid_system_to_zero(struct lab3_thread_pid_management *the_pid_system){
+    int i;
+    for(i = 0; i < pid_maximum_number ; i++){
+        the_pid_system->pid_array[i] = 0;
+    }   
+    return;
+}
+
 //glen coded above
 
 
