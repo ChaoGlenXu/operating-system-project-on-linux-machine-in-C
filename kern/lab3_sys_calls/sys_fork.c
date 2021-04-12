@@ -30,6 +30,7 @@
 int sys_fork(struct trapframe *tf, int32_t *retval){
     (void) tf;
     (void) retval;  
+    //fork will call the glen_lab3_child_entry funciton
 
 
     return 0;
