@@ -199,7 +199,8 @@ glen_lab3_forkentry(void *data1, unsigned long data2)//glens' idea for new forke
     as_activate( (struct addrspace *)data1 );
 
     struct trapframe child_tf;
-    child_tf = *(    (struct trapframe *)data2  );
+    //child_tf =    (struct trapframe *)kmalloc(sizeof(struct trapframe))  ;
+    child_tf = *(   (struct trapframe *)data2  );//child copy the parrent
     child_tf.tf_v0 = 0;
     child_tf.tf_a3 = 0;
     child_tf.tf_epc = (child_tf.tf_epc) + 4; //glen: the epc is the program counter, If system is 32 -bit the size would be 4 bytes for all the pointers.

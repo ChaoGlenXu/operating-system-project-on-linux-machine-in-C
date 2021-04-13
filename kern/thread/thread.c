@@ -14,6 +14,17 @@
 #include <vnode.h>
 #include "opt-synchprobs.h"
 
+//glen coded below
+#include <types.h>
+#include <kern/errno.h>
+#include <lib.h>
+#include <machine/pcb.h>
+#include <machine/spl.h>
+#include <machine/trapframe.h>
+#include <kern/callno.h>
+#include <syscall.h>
+//glen coded above
+
 /* States a thread can be in. */
 typedef enum {
 	S_RUN,
@@ -71,7 +82,9 @@ thread_create(const char *name)
 	
 	// If you add things to the thread structure, be sure to initialize
 	// them here.
-	
+	//glen coded below
+    thread->lab3_thread_pid = add_to_pid_system( &the_pid_system);
+    //glen coded above
 	return thread;
 }
 

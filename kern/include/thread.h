@@ -35,7 +35,7 @@ struct thread {
 
 
 //glen: wait pid need synchronizeation: ex lock  or directly call thread sleep
-    int lab3_thread_pid; //pid_t lab3_thread_pid; 
+    pid_t lab3_thread_pid; //pid_t lab3_thread_pid; 
 //TA advice below
 // waitpid(<pid>)
 // parent pid = 0; child1 /* pid = 1*/ = fork(); child2 /* pid = 2*/ = fork(); waitpid(child0);
@@ -47,8 +47,8 @@ struct thread {
 
 
 // fork
-// 1. copy the virtual address space (call as_copy)
-// 2. create the new child process
+// 1. copy the virtual address space (call as_copy) //done
+// 2. create the new child process   //done
 //    a. allocate a new pid for the child
 //    b. use thread_fork to create a new os161 thread with md_forkentry as a parameter
 //    c. copy the trapframe (duplicate parent trapframe)

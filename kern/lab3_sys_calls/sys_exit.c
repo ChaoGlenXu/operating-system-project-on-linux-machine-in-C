@@ -25,12 +25,14 @@
 
 //Description
 //Cause the current process to exit. The exit code exitcode is reported back to other process(es) via the waitpid() call. The process id of the exiting process should not be reused until all processes interested in collecting the exit code with waitpid have done so. (What "interested" means is intentionally left vague; you should design this.) 
+int exitcode;
 
 //return int err
 int sys_exit(struct trapframe *tf, int32_t *retval){
     (void) tf;
     (void) retval;  
     thread_yield();
+    exitcode = (int)tf->tf_a0;
     return 0;
 }
 //glen coded above

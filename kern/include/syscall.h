@@ -20,14 +20,15 @@ void glen_lab3_forkentry(void *data1, unsigned long data2);
 
 //sysCall.h   syscall.h
 
-#define pid_maximum_number 30  //0 -29
+#define pid_maximum_number 30  //1 -29 //29 in tatal since 0 is reserved 
 
 struct lab3_thread_pid_management{
-    int pid_array[pid_maximum_number];
+    pid_t pid_array[pid_maximum_number];
 };
 
 struct lab3_thread_pid_management the_pid_system;
 void initialize_pid_system_to_zero(struct lab3_thread_pid_management *the_pid_system);
+pid_t add_to_pid_system(struct lab3_thread_pid_management *the_pid_system);
 //glen coded above
 
 #endif /* _SYSCALL_H_ */
