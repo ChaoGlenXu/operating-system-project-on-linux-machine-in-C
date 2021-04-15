@@ -24,11 +24,13 @@ void glen_lab3_forkentry(void *data1, unsigned long data2);
 
 struct lab3_thread_pid_management{
     pid_t pid_array[pid_maximum_number];
+    int status_array[pid_maximum_number];
 };
 
 struct lab3_thread_pid_management the_pid_system;
 void initialize_pid_system_to_zero(struct lab3_thread_pid_management *the_pid_system);
-pid_t add_to_pid_system(struct lab3_thread_pid_management *the_pid_system);
+pid_t add_pid_to_pid_system(struct lab3_thread_pid_management *the_pid_system);
+int add_status_to_pid_system(struct lab3_thread_pid_management *the_pid_system, int exitcode, pid_t thread_pid);
 //glen coded above
 
 #endif /* _SYSCALL_H_ */

@@ -31,8 +31,11 @@ int exitcode;
 int sys_exit(struct trapframe *tf, int32_t *retval){
     (void) tf;
     (void) retval;  
-    thread_yield();
     exitcode = (int)tf->tf_a0;
+    thread_yield();
+    
+    
+    thread_exit();
     return 0;
 }
 //glen coded above

@@ -83,7 +83,7 @@ thread_create(const char *name)
 	// If you add things to the thread structure, be sure to initialize
 	// them here.
 	//glen coded below
-    thread->lab3_thread_pid = add_to_pid_system( &the_pid_system);
+    thread->lab3_thread_pid = add_pid_to_pid_system( &the_pid_system);
     //glen coded above
 	return thread;
 }
@@ -213,6 +213,14 @@ thread_bootstrap(void)
 	if (me==NULL) {
 		panic("thread_bootstrap: Out of memory\n");
 	}
+
+
+    //glen coded below
+    me->lab3_thread_pid = (pid_t)0;
+    the_pid_system.pid_array[0] = 1; //it means the menu parent thread is created
+    //glen coded above
+
+
 
 	/*
 	 * Leave me->t_stack NULL. This means we're using the boot stack,
@@ -359,7 +367,10 @@ thread_fork(const char *name,
 int thread_join(struct thread * thread)
 {
         // Replace this
-        clocksleep(5);
+        //clocksleep(5);
+        //glen coded below
+        thread_sleep(thread);
+        //glen coded above
         
         (void)thread;  // suppress warning until code gets written
         return 0;

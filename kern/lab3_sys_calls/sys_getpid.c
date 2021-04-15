@@ -59,15 +59,25 @@ void initialize_pid_system_to_zero(struct lab3_thread_pid_management *the_pid_sy
     return;
 }
 
-pid_t add_to_pid_system(struct lab3_thread_pid_management *the_pid_system){
+//the thread calling this set the pid = add_pid_to_pid_system()
+pid_t add_pid_to_pid_system(struct lab3_thread_pid_management *the_pid_system){
     int i;
     for(i = 1; i < pid_maximum_number ; i++){
         if (the_pid_system->pid_array[i] == 0){
             the_pid_system->pid_array[i] = 1;
+            
             return (pid_t)i;
         }
     }   
     return -5;//the arrary is full
+}
+
+int add_status_to_pid_system(struct lab3_thread_pid_management *the_pid_system, int exitcode, pid_t thread_pid){
+    int local_exitcode = exitcode;
+    
+    the_pid_system->status_array[thread_pid] = exitcode;
+
+    return local_exitcode;//the arrary is full
 }
 
 //glen coded above
