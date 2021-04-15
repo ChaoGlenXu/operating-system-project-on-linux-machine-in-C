@@ -83,7 +83,8 @@ thread_create(const char *name)
 	// If you add things to the thread structure, be sure to initialize
 	// them here.
 	//glen coded below
-    thread->lab3_thread_pid = add_pid_to_pid_system( &the_pid_system);
+    //thread->lab3_thread_pid = add_pid_to_pid_system( &the_pid_system);
+    thread->lab3_thread_pid = add_pid_to_pid_array();
     //glen coded above
 	return thread;
 }
@@ -369,7 +370,7 @@ int thread_join(struct thread * thread)
         // Replace this
         //clocksleep(5);
         //glen coded below
-        thread_sleep(thread);
+        thread_sleep(thread); //not sure if it should be curthread
         //glen coded above
         
         (void)thread;  // suppress warning until code gets written

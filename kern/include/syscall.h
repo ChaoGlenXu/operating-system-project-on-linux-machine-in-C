@@ -27,7 +27,22 @@ struct lab3_thread_pid_management{
     int status_array[pid_maximum_number];
 };
 
+
+struct pid_structure{
+    pid_t pid;
+    int taken;
+    int status;
+    pid_t parent;
+    pid_t child;
+};
+
 struct lab3_thread_pid_management the_pid_system;
+struct pid_structure lab3_pid_array[pid_maximum_number];
+
+void initialize_pid_array(void );
+pid_t add_pid_to_pid_array(void);
+int add_status_to_pid_array(int exitcode, pid_t thread_pid);
+
 void initialize_pid_system_to_zero(struct lab3_thread_pid_management *the_pid_system);
 pid_t add_pid_to_pid_system(struct lab3_thread_pid_management *the_pid_system);
 int add_status_to_pid_system(struct lab3_thread_pid_management *the_pid_system, int exitcode, pid_t thread_pid);

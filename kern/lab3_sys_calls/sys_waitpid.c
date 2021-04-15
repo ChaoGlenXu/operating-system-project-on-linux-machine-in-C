@@ -30,19 +30,14 @@
 int sys_waitpid(struct trapframe *tf, int32_t *retval){
     (void) tf;
     (void) retval;  
-    //thread_yield();
-    //thread_sleep(const void *addr);
-    //size_t size = tf->tf_a2;
-    int the_fd_value = tf->tf_a0;
-    size_t local_buflen = (size_t) tf->tf_a2;
-    if((the_fd_value == 1 )||(the_fd_value == 2) ){ //assume 1 is write
-        //void *new_dynamic_data = kmalloc(size);
 
-        //strcpy(new_dynamic_data, buf); //
-        //copyout((int *)tf->tf_a1, new_dynamic_data, size);  
-        kprintf("%s", (char *)tf->tf_a1);  //  void *
-        *retval =  local_buflen;  
-    }
+    //pid_t pid = (pid_t) tf->tf_a0;
+    //int* status = (int*) tf->tf_a1;
+    //int options = (int) tf->tf_a2;
+
+    //check if the pid value is valid, pid has to be a real process that exist
+    //the pid has to be a direct child 
+
 
     return 0;
 }
