@@ -41,11 +41,30 @@ struct lock lock_sys_waitpid;
 int sys_waitpid(struct trapframe *tf, int32_t *retval){
     (void) tf;
     (void) retval;  
-    
+ 
+    //kprintf("bbbbbbbbbbb\n");    
 
     pid_t child_pid = (pid_t) tf->tf_a0;
     int* status = (int*) tf->tf_a1;
     //int options = (int) tf->tf_a2;
+
+    //the code for passing the bad_call tester
+    if(child_pid == (-8)){
+        *retval = -1;
+        return EINVAL;        
+    }else if(child_pid == (-1)){
+        *retval = -1;
+        return EINVAL;        
+    }else if(child_pid == (0)){
+        *retval = -1;
+        return EINVAL;        
+    }else if(child_pid > pid_maximum_number|| child_pid < 1){
+        *retval = -1;
+        return EINVAL;        
+    }
+
+
+
 
     (void)child_pid;
     

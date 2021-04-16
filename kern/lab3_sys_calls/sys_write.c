@@ -34,6 +34,7 @@ int sys_write(struct trapframe *tf, int32_t *retval){
     //thread_sleep(const void *addr);
     //size_t size = tf->tf_a2;
     int the_fd_value = tf->tf_a0;
+    void *buf = (void *) tf->tf_a1;
     size_t local_buflen = (size_t) tf->tf_a2;
  /*   size_t nbytes = (size_t) tf->tf_a3;
     if (nbytes <= 0) {
@@ -45,13 +46,35 @@ int sys_write(struct trapframe *tf, int32_t *retval){
         return EBADF;
     }
 */
+    char* temp = kmalloc(local_buflen);
     if((the_fd_value == 1 )||(the_fd_value == 2) ){ //assume 1 is write
         //void *new_dynamic_data = kmalloc(size);
 
         //strcpy(new_dynamic_data, buf); //
         //copyout((int *)tf->tf_a1, new_dynamic_data, size); 
         //kprintf("buf: \'%s\'\n", (char *)tf->tf_a1);
-        kprintf("%c", *(char *)tf->tf_a1);  //  void *
+        
+        //kprintf("%c", *(char *)tf->tf_a1);  //  void * //pass 46/130 lab3
+
+        //kprintf("%s", (char *)tf->tf_a1);  //  void * //was correct
+
+        //alternative below
+        
+        int return_from_copyin = copyin((const_userptr_t) buf, temp, local_buflen);
+        //alternative above
+
+        if (!return_from_copyin) {
+            int i = 0;
+            while (i != (int) local_buflen) {
+                char* while_temp = temp + i;
+                (void)while_temp;
+                kprintf("%c", *while_temp);
+                //kprintf("%c", *(temp + i));
+                i++;
+            }
+        }
+
+
         *retval =  local_buflen;  
     }
 
