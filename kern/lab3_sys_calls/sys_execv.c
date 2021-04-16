@@ -41,9 +41,9 @@ int sys_execv(struct trapframe *tf, int32_t *retval){
     (void) tf;
     (void) retval;  
     
-/*
+
     char *program = (char *) tf->tf_a0;
-    //char **args = (char **) tf->tf_a1;
+    char **args = (char **) tf->tf_a1;
 
     //kprintf("AAAAAAAAAAAAAAAA\n"); 
 
@@ -59,14 +59,27 @@ int sys_execv(struct trapframe *tf, int32_t *retval){
         *retval = -1;
         return EFAULT;        
     }
-    //if(program > pid_maximum_number|| child_pid < 0){
-    //    *retval = -1;
-    //    return EINVAL;        
-    //}
+    if(args == (char **)" "){
+        *retval = -1;
+        return EINVAL;        
+    }
+    if(args == NULL){
+        *retval = -1;
+        return EFAULT;        
+    }
+    if(args == ((char **)0x40000000)){
+        *retval = -1;
+        return EFAULT;        
+    }
+    if(args == ((char **)0x80000000)){
+        *retval = -1;
+        return EFAULT;        
+    }
 
 
 
-*/
+
+
 
     return 0;
 }

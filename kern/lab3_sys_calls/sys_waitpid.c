@@ -62,8 +62,19 @@ int sys_waitpid(struct trapframe *tf, int32_t *retval){
         *retval = -1;
         return EINVAL;        
     }
-
-
+    if(status == NULL){
+        *retval = -1;
+        return EFAULT;        
+    }
+    if(status == (int*)0x40000000){
+        *retval = -1;
+        return EFAULT;        
+    }
+    if(status == (int*)0x80000000){
+        *retval = -1;
+        return EFAULT;        
+    }
+    
 
 
     (void)child_pid;
