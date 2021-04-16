@@ -30,6 +30,7 @@
 int sys_waitpid(struct trapframe *tf, int32_t *retval){
     (void) tf;
     (void) retval;  
+    
 
     //pid_t pid = (pid_t) tf->tf_a0;
     //int* status = (int*) tf->tf_a1;
@@ -37,8 +38,22 @@ int sys_waitpid(struct trapframe *tf, int32_t *retval){
 
     //check if the pid value is valid, pid has to be a real process that exist
     //the pid has to be a direct child 
+/*    if(lab3_pid_array[child].parent == -4){//invalid pid
+        tf->tf_v0 = EINVAL;// Invalid argument 
+        return -1;
+    }
+    if(lab3_pid_array[child].status == -4){//invalid pid
+        tf->tf_v0 = EFAULT; // Bad memory reference 
+        return -1;
+    }
+*/
+    //lab session note: thread_join(struct thread * thread) should be called in sys_waitpid in parallel to sys_exit calls ..
 
+    //int s = splhigh(); //lock here   like pid arrary or etc
 
+    
+
+    //splx(s); //release the lock
     return 0;
 }
 //glen coded above

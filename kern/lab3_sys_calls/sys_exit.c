@@ -34,9 +34,10 @@ int sys_exit(struct trapframe *tf, int32_t *retval){
     exitcode = (int)tf->tf_a0;
     //assume curthread calling this function
     pid_t local_pid = (pid_t) curthread->lab3_thread_pid;
-    add_status_to_pid_system( &the_pid_system, exitcode, local_pid);
+    //add_status_to_pid_system( &the_pid_system, exitcode, local_pid);
+    add_status_to_pid_array(exitcode, local_pid);
     
-    thread_yield();
+    //thread_yield(); this is right for lab1 optional, but wrong for lab3
     
     
     thread_exit();

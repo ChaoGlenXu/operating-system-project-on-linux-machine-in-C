@@ -48,7 +48,7 @@ int sys_getpid(struct trapframe *tf, int32_t *retval){
     return 0;
 }
 
-
+/*
 
 //the code below are not syscall but the functions for managment of thread pid system
 void initialize_pid_system_to_zero(struct lab3_thread_pid_management *the_pid_system){
@@ -80,6 +80,8 @@ int add_status_to_pid_system(struct lab3_thread_pid_management *the_pid_system, 
     return local_exitcode;//the arrary is full
 }
 
+*/
+
 //the code below are not syscall but the functions for managment of thread pid system
 void initialize_pid_array(void ){ //struct pid_structure &lab3_pid_array[] this is pass array by reference, right? // i think i don't need to pass array since global varialbe
     int i;
@@ -88,6 +90,7 @@ void initialize_pid_array(void ){ //struct pid_structure &lab3_pid_array[] this 
         lab3_pid_array[i].taken = 0;
         lab3_pid_array[i].parent = -4; // -4 as unsigned
         lab3_pid_array[i].child = -4; // -4 as unsigned
+        lab3_pid_array[i].status = -4; // -4 as unsigned
     }   
     return;
 }

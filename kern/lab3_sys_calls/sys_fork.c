@@ -43,6 +43,10 @@
 int sys_fork(struct trapframe *tf, int32_t *retval){
     (void) tf;
     (void) retval;  
+    //label the parent here
+    pid_t parent = curthread->lab3_thread_pid; //could be wrong//confirmed to be curhtread
+    //lab3_pid_array[parent] 
+    
     //fork will call the glen_lab3_child_entry funciton
     struct addrspace * child_address_space = as_create();//do i need this step and is this step nessesary?
     as_copy(curthread->t_vmspace , &child_address_space);
@@ -50,6 +54,13 @@ int sys_fork(struct trapframe *tf, int32_t *retval){
     struct thread *the_child_thread = NULL;
     int error_code = thread_fork("child_process", (void *)child_address_space, (unsigned long) tf, glen_lab3_forkentry, &the_child_thread);
     
+    //now the child is created, label the child here
+    pid_t child = the_child_thread->lab3_thread_pid;
+    
+    //add the parent child relationship here
+    lab3_pid_array[parent].child = child;
+    lab3_pid_array[child].parent = parent;
+
     if(error_code){;}//error checking, will do it after implemented waitpid
 
     *retval = the_child_thread->lab3_thread_pid;

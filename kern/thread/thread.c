@@ -371,6 +371,7 @@ int thread_join(struct thread * thread)
         //clocksleep(5);
         //glen coded below
         thread_sleep(thread); //not sure if it should be curthread
+        //thread_sleep(curthread); wrong
         //glen coded above
         
         (void)thread;  // suppress warning until code gets written
@@ -507,9 +508,15 @@ thread_exit(void)
 		curthread->t_cwd = NULL;
 	}
 
+    //glen coded below
+    thread_wakeup(curthread);
+    //glen coded above
+
 	assert(numthreads>0);
 	numthreads--;
 	mi_switch(S_ZOMB);
+
+    
 
 	panic("Thread came back from the dead!\n");
 }
