@@ -7,6 +7,7 @@
 #include <vm.h>
 #include <thread.h>
 #include <curthread.h>
+#include <syscall.h>
 
 extern u_int32_t curkstack;
 
@@ -36,16 +37,18 @@ static const char *const trapcodenames[NTRAPCODES] = {
  */
 static
 void
-kill_curthread(u_int32_t epc, unsigned code, u_int32_t vaddr)
+kill_curthread(u_int32_t epc, unsigned code, u_int32_t vaddr) //code equal to tf
 {
 	assert(code<NTRAPCODES);
 	kprintf("Fatal user mode trap %u (%s, epc 0x%x, vaddr 0x%x)\n",
 		code, trapcodenames[code], epc, vaddr);
 
+    sys_exit(code);//lab3
+
 	/*
 	 * You will probably want to change this.
 	 */
-	panic("I don't know how to handle this\n");
+	//panic("I don't know how to handle this\n");
 }
 
 /*

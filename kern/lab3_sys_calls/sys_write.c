@@ -49,8 +49,9 @@ int sys_write(struct trapframe *tf, int32_t *retval){
         //void *new_dynamic_data = kmalloc(size);
 
         //strcpy(new_dynamic_data, buf); //
-        //copyout((int *)tf->tf_a1, new_dynamic_data, size);  
-        kprintf("%s", (char *)tf->tf_a1);  //  void *
+        //copyout((int *)tf->tf_a1, new_dynamic_data, size); 
+        //kprintf("buf: \'%s\'\n", (char *)tf->tf_a1);
+        kprintf("%c", *(char *)tf->tf_a1);  //  void *
         *retval =  local_buflen;  
     }
 

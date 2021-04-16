@@ -84,7 +84,7 @@ thread_create(const char *name)
 	// them here.
 	//glen coded below
     //thread->lab3_thread_pid = add_pid_to_pid_system( &the_pid_system);
-    thread->lab3_thread_pid = add_pid_to_pid_array();
+    thread->lab3_thread_pid = add_pid_to_pid_array(thread);
     //glen coded above
 	return thread;
 }
@@ -370,7 +370,10 @@ int thread_join(struct thread * thread)
         // Replace this
         //clocksleep(5);
         //glen coded below
+        int spl = splhigh();
         thread_sleep(thread); //not sure if it should be curthread
+        splx(spl);
+
         //thread_sleep(curthread); wrong
         //glen coded above
         
@@ -387,10 +390,10 @@ mi_switch(threadstate_t nextstate)
 {
 	struct thread *cur, *next;
 	int result;
-	
+	//kprintf("-----------------\n"); 
 	/* Interrupts should already be off. */
 	assert(curspl>0);
-
+    //kprintf("-----------------\n"); 
 	if (curthread != NULL && curthread->t_stack != NULL) {
 		/*
 		 * Check the magic number we put on the bottom end of

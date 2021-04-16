@@ -90,17 +90,20 @@ void initialize_pid_array(void ){ //struct pid_structure &lab3_pid_array[] this 
         lab3_pid_array[i].taken = 0;
         lab3_pid_array[i].parent = -4; // -4 as unsigned
         lab3_pid_array[i].child = -4; // -4 as unsigned
-        lab3_pid_array[i].status = -4; // -4 as unsigned
+        lab3_pid_array[i].thread = NULL;
+        //lab3_pid_array[i].status = -4; // -4 as unsigned
     }   
     return;
 }
 
 //the thread calling this set the pid = add_pid_to_pid_system()
-pid_t add_pid_to_pid_array(void){
+pid_t add_pid_to_pid_array(struct thread * thread){
     int i;
     for(i = 1; i < pid_maximum_number ; i++){
         if (lab3_pid_array[i].taken == 0){
             lab3_pid_array[i].taken = 1;
+            lab3_pid_array[i].thread = thread;
+            
             
             return (pid_t)i;
         }

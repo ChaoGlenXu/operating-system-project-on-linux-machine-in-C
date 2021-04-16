@@ -85,7 +85,7 @@ mips_syscall(struct trapframe *tf)
 	 */
 
 	retval = 0;
-
+//kprintf("AoooooA\n");
 	switch (callno) {
 	    case SYS_reboot:
 		err = sys_reboot(tf->tf_a0);
@@ -96,7 +96,7 @@ mips_syscall(struct trapframe *tf)
         //glen coded below
         case SYS__exit:
 		//err = sys_exit(&tf, &retval); is the &tf the pass by reference of the pointer
-		err = sys_exit(tf, &retval); //or (tf, retval, err) //a_0 sin //&tf address of the pointer
+		err = sys_exit((int)tf->tf_a0); //or (tf, retval, err) //a_0 sin //&tf address of the pointer
         // int *status = (int *)tf->tf_a1;
         // copyout: copy from kernelspace "out" to userspace
         // copyin: copy from userpsace "in" to kernelspace
@@ -119,6 +119,7 @@ mips_syscall(struct trapframe *tf)
 		break;
 
         case SYS_fork:
+        //kprintf("A sys fork called A\n");
 		err = sys_fork(tf, &retval); //or (tf, retval, err) //a_0 sin
 		break;
 
@@ -198,13 +199,15 @@ glen_lab3_forkentry(void *data1, unsigned long data2)//glens' idea for new forke
     curthread->t_vmspace = (struct addrspace *)data1; 
     as_activate( (struct addrspace *)data1 );
 
-    struct trapframe child_tf;
+    struct trapframe child_tf = *(struct trapframe *)data2;
     //child_tf =    (struct trapframe *)kmalloc(sizeof(struct trapframe))  ;
-    child_tf = *(   (struct trapframe *)data2  );//child copy the parrent
+    //child_tf = *(   (struct trapframe *)data2  );//child copy the parrent
     child_tf.tf_v0 = 0;
     child_tf.tf_a3 = 0;
     child_tf.tf_epc = (child_tf.tf_epc) + 4; //glen: the epc is the program counter, If system is 32 -bit the size would be 4 bytes for all the pointers.
     
+    kfree((struct trapframe *)data2);
+
     mips_usermode(&child_tf);//continue the process, transfer the control of the process to user mode
     //glen coded above
 	
