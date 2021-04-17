@@ -122,6 +122,13 @@ int sys_waitpid(struct trapframe *tf, int32_t *retval){
         copyout((const void *)lab3_pid_array[child_pid].status, (userptr_t) status, (size_t) sizeof(int));
         
         lab3_pid_array[child_pid].taken = 0;
+
+ /*       if(bad_call_check != 0){// means there is an error, i need to reture the error code
+            *retval = -1;
+            splx(s); //release the lock
+            return bad_call_check;
+        }     */
+    
         //thread_exit();//not sure if it should be thread exit the current thread
     }else{ //this case: the child thread exits
         *retval = -1;
