@@ -116,7 +116,11 @@ int sys_waitpid(struct trapframe *tf, int32_t *retval){
         if (lab3_pid_array[child_pid].thread != NULL) {
             thread_join(lab3_pid_array[child_pid].thread);
         }
-        *status = lab3_pid_array[child_pid].status;
+        
+        //*status = lab3_pid_array[child_pid].status;
+        //it is safer to use copyout to write to the status
+        copyout((const void *)lab3_pid_array[child_pid].status, (userptr_t) status, (size_t) sizeof(int));
+        
         lab3_pid_array[child_pid].taken = 0;
         //thread_exit();//not sure if it should be thread exit the current thread
     }else{ //this case: the child thread exits
