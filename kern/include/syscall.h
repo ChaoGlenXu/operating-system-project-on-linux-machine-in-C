@@ -18,7 +18,7 @@ int sys_getpid(struct trapframe *tf, int32_t *retval);
 int sys_waitpid(struct trapframe *tf, int32_t *retval);
 void glen_lab3_forkentry(void *data1, unsigned long data2);
 int sys_execv(struct trapframe *tf, int32_t *retval);
-
+int sys_sbrk(struct trapframe *tf, int32_t *retval);
 //sysCall.h   syscall.h
 
 #define pid_maximum_number 3000  //1 -29 //29 in tatal since 0 is reserved 
