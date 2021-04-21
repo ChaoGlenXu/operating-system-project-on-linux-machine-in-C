@@ -78,11 +78,11 @@ int sys_execv(struct trapframe *tf, int32_t *retval){
         *retval = -1;
         return EFAULT;        
     }
-    if(*string_array[1] == (char *)0x40000000){
+    if(*string_array[1] == (char )0x40000000){
         *retval = -1;
         return EFAULT;        
     }
-    if(*string_array[1] == (char *)0x80000000){
+    if(*string_array[1] == (char )0x80000000){
         *retval = -1;
         return EFAULT;        
     }
