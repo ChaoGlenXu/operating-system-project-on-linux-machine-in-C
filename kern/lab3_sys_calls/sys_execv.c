@@ -44,6 +44,9 @@ int sys_execv(struct trapframe *tf, int32_t *retval){
 
     char *program = (char *) tf->tf_a0;
     char **args = (char **) tf->tf_a1;
+    char** string_array = (char **)kmalloc(3*sizeof(char*));//= args;
+    string_array[1] = (char *)tf->tf_a1;
+    //char* string_array[] = (char **) tf->tf_a1;//= args;
 
     //kprintf("AAAAAAAAAAAAAAAA\n"); 
 
@@ -72,6 +75,14 @@ int sys_execv(struct trapframe *tf, int32_t *retval){
         return EFAULT;        
     }
     if(args == ((char **)0x80000000)){
+        *retval = -1;
+        return EFAULT;        
+    }
+    if(*string_array[1] == (char *)0x40000000){
+        *retval = -1;
+        return EFAULT;        
+    }
+    if(*string_array[1] == (char *)0x80000000){
         *retval = -1;
         return EFAULT;        
     }
