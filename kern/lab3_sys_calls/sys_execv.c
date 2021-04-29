@@ -89,13 +89,6 @@ int sys_execv(struct trapframe *tf, int32_t *retval){
 
 //some useless comments for lab4
 
-
-
-
-
-
-
-
     return 0;
 }
 //glen coded above
