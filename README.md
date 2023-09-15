@@ -1,10 +1,7 @@
 os161
 =====
 
-The purpose of this repository to keep a copy of the latest starter code for 
-os-161, presumably for the ece344 course offered by University of Toronto. We 
-continue to make changes to the start code to make it easier for students to
-design and test their implementation.
+The project is completed as a part of the course ECE344: Operating System offered by University of Toronto. The project was done exclusively by Chao Glen Xu.
 
 major updates
 -------------
